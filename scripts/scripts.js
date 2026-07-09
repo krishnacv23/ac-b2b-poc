@@ -144,6 +144,7 @@ async function loadEager(doc) {
   decorateTemplateAndTheme();
 
   const main = doc.querySelector('main');
+  let initSucceeded = true;
   if (main) {
     try {
       await initializeCommerce();
@@ -151,11 +152,16 @@ async function loadEager(doc) {
       applyTemplates(doc);
       await loadCommerceEager();
     } catch (e) {
+      initSucceeded = false;
       console.error('Error initializing commerce configuration:', e);
-      loadErrorPage(418);
+      await loadErrorPage(418);
     }
+    if (!initSucceeded) return;
     document.body.classList.add('appear');
-    await loadSection(main.querySelector('.section'), waitForFirstImage);
+    const firstSection = main.querySelector('.section');
+    if (firstSection) {
+      await loadSection(firstSection, waitForFirstImage);
+    }
   }
 
   try {
