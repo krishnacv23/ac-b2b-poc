@@ -588,9 +588,40 @@ export async function fetchPlaceholders(path) {
  *
  * @returns {Promise<Object>} - The config JSON from session storage
  */
-export async function getConfigFromSession() {
-  const configURL = `${window.location.origin}/config.json`;
+const CONFIG_URLS = [
+  '/config.json',
+  '/demo-config.json',
+];
 
+async function fetchConfigFromUrls() {
+  const basePath = window.hlx?.codeBasePath || '';
+  const urls = CONFIG_URLS.map((path) => `${window.location.origin}${basePath}${path}`);
+
+  const results = await Promise.all(
+    urls.map(async (url) => {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) return null;
+        return response.json();
+      } catch {
+        return null;
+      }
+    }),
+  );
+
+  const configJSON = results.find(Boolean);
+  if (!configJSON) {
+    throw new Error('Failed to fetch config');
+  }
+
+  if (results[0] === null && results[1]) {
+    console.warn('Using demo-config.json fallback because config.json is unavailable');
+  }
+
+  return configJSON;
+}
+
+export async function getConfigFromSession() {
   try {
     const configJSON = window.sessionStorage.getItem('config');
     if (!configJSON) {
@@ -606,9 +637,7 @@ export async function getConfigFromSession() {
     }
     return parsedConfig;
   } catch (e) {
-    const config = await fetch(configURL);
-    if (!config.ok) throw new Error('Failed to fetch config');
-    const configJSON = await config.json();
+    const configJSON = await fetchConfigFromUrls();
     configJSON[':expiry'] = Math.round(Date.now() / 1000) + 7200;
     window.sessionStorage.setItem('config', JSON.stringify(configJSON));
     return configJSON;
