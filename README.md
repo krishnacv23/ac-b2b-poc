@@ -19,6 +19,48 @@ Use the [Site Creator Tool](https://da.live/app/adobe-commerce/storefront-tools/
 
 Alternatively, you can follow our [Guide](https://experienceleague.adobe.com/developer/commerce/storefront/get-started/) for a more detailed walkthrough.
 
+## Universal Editor (DA + Author Bus)
+
+This project is instrumented for [Universal Editor](https://docs.da.live/developers/reference/universal-editor) with Document Authoring on Author Bus. Runtime support loads when the site is served from `*.ue.da.live` (`scripts/ue.js`). Component authoring is controlled by the root `component-definition.json`, `component-models.json`, and `component-filters.json` files, which are generated from `models/` and `blocks/*/_*.json`.
+
+**Full how-to (replicate on other projects):** [docs/universal-editor.md](docs/universal-editor.md)
+
+### Prerequisites
+
+See [Setup Universal Editor](https://docs.da.live/administrators/guides/setup-universal-editor):
+
+1. An Adobe DX handle (for example `@yourcompany` from the `experience.adobe.com` URL)
+2. Universal Editor enabled for your IMS org (requires AEM Sites credits)
+3. A site on [da.live](https://da.live)
+4. Chrome or Safari
+
+### DA org configuration
+
+In your DA org or site config (`https://da.live/config#/{org}/` or `.../{site}`), on the `data` sheet add:
+
+```text
+key: editor.path
+value: /{org}/{site}=https://experience.adobe.com/#/@{dxHandle}/aem/editor/canvas/main--ac-b2b-poc--krishnacv23.ue.da.live
+```
+
+This project’s working value:
+
+```text
+/krishnacv23/ac-b2b-poc=https://experience.adobe.com/#/@echidnaptrsd/aem/editor/canvas/main--ac-b2b-poc--krishnacv23.ue.da.live
+```
+
+To test a feature branch, change the canvas host to `{branch}--ac-b2b-poc--krishnacv23.ue.da.live`.
+
+### Updating component models
+
+After editing block models under `models/` or `blocks/*/_*.json`, regenerate the consolidated UE files:
+
+```bash
+npm run build:json
+```
+
+A pre-commit hook also runs this build so the root `component-*.json` files stay in sync.
+
 ## Staying Up to Date
 
 Once you fork or clone this repo, the code is yours — you are not subscribed to updates.
