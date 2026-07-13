@@ -1,0 +1,43 @@
+{
+  "definitions": [{
+    "title": "Commerce Custom Product List",
+    "id": "commerce-custom-product-list",
+    "model": "commerce-custom-product-list",
+    "plugins": {
+      "da": {
+        "type": "key-value-block"
+      }
+    }
+  }],
+  "models": [{
+    "id": "commerce-custom-product-list",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Title",
+        "description": "Heading shown above the custom product grid"
+      },
+      {
+        "component": "text",
+        "name": "phrase",
+        "label": "Search Phrase",
+        "description": "Optional default search phrase. URL ?q= still overrides this value."
+      },
+      {
+        "component": "text",
+        "name": "urlpath",
+        "label": "Category Path",
+        "description": "Optional catalog category path filter"
+      },
+      {
+        "component": "number",
+        "name": "pageSize",
+        "label": "Page Size",
+        "value": 12,
+        "description": "Number of products to load"
+      }
+    ]
+  }],
+  "filters": []
+}

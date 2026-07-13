@@ -1,1 +1,34 @@
 /* add global styles that can be loaded post LCP here */
+
+/* Product listing page hero (authored content above PLP block) */
+.products-hero {
+  margin-block: var(--spacing-medium) var(--spacing-small);
+  padding: var(--spacing-medium);
+  border: 1px solid var(--color-neutral-300);
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--color-neutral-100), var(--color-neutral-50));
+}
+
+.products-hero__eyebrow {
+  color: var(--color-brand-600);
+  font: var(--type-details-caption-1-font);
+  letter-spacing: 0.08em;
+  margin: 0 0 var(--spacing-xsmall);
+  text-transform: uppercase;
+}
+
+.products-hero h1 {
+  margin: 0 0 var(--spacing-xsmall);
+}
+
+.products-hero__description {
+  color: var(--color-neutral-700);
+  margin: 0 0 var(--spacing-xsmall);
+  max-width: 70ch;
+}
+
+.products-hero__hint {
+  color: var(--color-neutral-600);
+  font: var(--type-details-caption-2-font);
+  margin: 0;
+}

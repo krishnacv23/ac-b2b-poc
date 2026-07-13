@@ -1,25 +1,32 @@
 {
   "public": {
     "default": {
+      "commerce-core-endpoint": "https://na1-sandbox.api.commerce.adobe.com/29Pa8gWyrmt2SiTQWwgSqJ/graphql",
       "commerce-endpoint": "https://na1-sandbox.api.commerce.adobe.com/29Pa8gWyrmt2SiTQWwgSqJ/graphql",
-      "adobe-commerce-optimizer": true,
       "commerce-assets-enabled": true,
       "commerce-b2b-enabled": true,
       "commerce-companies-enabled": true,
       "headers": {
-        "cs": {}
+        "all": {
+          "Store": "default"
+        },
+        "cs": {
+          "Magento-Store-Code": "default",
+          "Magento-Store-View-Code": "default",
+          "Magento-Website-Code": "base"
+        }
       },
       "analytics": {
-        "environment-id": "29Pa8gWyrmt2SiTQWwgSqJ",
         "environment": "Testing",
         "base-currency-code": "USD",
-        "store-view-currency-code": "USD",
-        "storefront-template": "Other",
-        "locale": "en-US"
+        "store-code": "default",
+        "store-view-code": "default",
+        "website-code": "base",
+        "store-url": "https://main--ac-b2b-poc--krishnacv23.aem.page"
       },
       "plugins": {
         "picker": {
-          "rootCategory": "YOUR_ROOT_CATEGORY_ID"
+          "rootCategory": "2"
         }
       }
     }
