@@ -1,4 +1,5 @@
 import { search } from '@dropins/storefront-product-discovery/api.js';
+import { ensureCatalogServiceHeaders } from '../../initializers/search.js';
 
 const VISIBILITY_FILTER = {
   attribute: 'visibility',
@@ -36,6 +37,9 @@ export async function loadProducts({
   currentPage = 1,
   categoryPath,
 } = {}) {
+  // Guarantee Magento-Store-* headers before productSearch (ACCS requirement).
+  ensureCatalogServiceHeaders();
+
   const filter = [VISIBILITY_FILTER];
   if (categoryPath) filter.push({ attribute: 'categoryPath', eq: categoryPath });
 

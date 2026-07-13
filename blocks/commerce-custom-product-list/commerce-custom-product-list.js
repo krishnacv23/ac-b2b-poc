@@ -3,10 +3,14 @@ import { readBlockConfig } from '../../scripts/aem.js';
 import { fetchPlaceholders } from '../../scripts/commerce.js';
 import CustomProductList from '../../scripts/components/custom-product-list/CustomProductList.js';
 
-import '../../scripts/initializers/search.js';
-import '../../scripts/initializers/cart.js';
-
 export default async function decorate(block) {
+  // Ensure product-discovery (and cart) are initialized before the Preact tree
+  // calls search(). Side-effect imports alone can race on UE/preview first paint.
+  await Promise.all([
+    import('../../scripts/initializers/search.js'),
+    import('../../scripts/initializers/cart.js'),
+  ]);
+
   const [labels, config] = await Promise.all([
     fetchPlaceholders(),
     Promise.resolve(readBlockConfig(block)),

@@ -9,6 +9,24 @@ function getStatusMessage(count, phrase) {
   return phrase ? `${count} products found for "${phrase}".` : `${count} products found.`;
 }
 
+function getErrorMessage(error) {
+  const detail = error?.message || String(error || 'Unknown error');
+  return `Unable to load products. ${detail}`;
+}
+
+async function fetchProductsWithRetry(options, attemptsLeft = 2) {
+  try {
+    return await loadProducts(options);
+  } catch (error) {
+    if (attemptsLeft <= 1) throw error;
+    // Brief delay for commerce/search init on first paint (common on UE/preview).
+    await new Promise((resolve) => {
+      setTimeout(resolve, 300);
+    });
+    return fetchProductsWithRetry(options, attemptsLeft - 1);
+  }
+}
+
 export default function CustomProductList({
   block,
   title,
@@ -24,7 +42,7 @@ export default function CustomProductList({
   useEffect(() => {
     let active = true;
 
-    loadProducts({
+    fetchProductsWithRetry({
       phrase, pageSize, currentPage: 1, categoryPath,
     })
       .then((result) => {
@@ -42,7 +60,7 @@ export default function CustomProductList({
 
         console.error('Custom product list failed to load products', error);
         setProducts([]);
-        setStatus('Unable to load products. Check commerce config and GraphQL access.');
+        setStatus(getErrorMessage(error));
         setLoadState('error');
       });
 
