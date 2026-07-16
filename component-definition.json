@@ -379,6 +379,16 @@
           }
         },
         {
+          "title": "Commerce Custom Product Details",
+          "id": "commerce-custom-product-details",
+          "model": "commerce-custom-product-details",
+          "plugins": {
+            "da": {
+              "type": "key-value-block"
+            }
+          }
+        },
+        {
           "title": "Commerce Custom Product List",
           "id": "commerce-custom-product-list",
           "model": "commerce-custom-product-list",

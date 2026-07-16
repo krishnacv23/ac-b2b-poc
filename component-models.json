@@ -321,6 +321,29 @@
     ]
   },
   {
+    "id": "commerce-custom-product-details",
+    "fields": [
+      {
+        "component": "text",
+        "name": "sku",
+        "label": "SKU",
+        "description": "Product SKU. Falls back to URL /products/{urlKey}/{sku}, ?sku=, or defaultSku."
+      },
+      {
+        "component": "text",
+        "name": "defaultSku",
+        "label": "Default SKU",
+        "description": "Optional fallback SKU for template/UE pages"
+      },
+      {
+        "component": "text",
+        "name": "backHref",
+        "label": "Back Link",
+        "description": "Optional catalog back link (default: /drafts/custom-products)"
+      }
+    ]
+  },
+  {
     "id": "commerce-custom-product-list",
     "fields": [
       {

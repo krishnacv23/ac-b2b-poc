@@ -1,6 +1,6 @@
 import { h } from '@dropins/tools/preact.js';
-import * as cartApi from '@dropins/storefront-cart/api.js';
-import { getProductLink } from '../../commerce.js';
+import { addProductsToCart } from '@dropins/storefront-cart/api.js';
+import { getProductLink, rootLink } from '../../commerce.js';
 import {
   getProductImage,
   getProductPrice,
@@ -8,13 +8,22 @@ import {
 
 const PREFIX = 'commerce-custom-product-list';
 
+function getDetailsHref(urlKey, sku) {
+  // On local drafts, route into the custom PDP draft for an end-to-end demo.
+  if (window.location.pathname.includes('/drafts/')) {
+    return `${rootLink('/drafts/custom-product-details')}?sku=${encodeURIComponent(sku)}`;
+  }
+  return getProductLink(urlKey, sku);
+}
+
 export default function ProductCard({ product, addToCartLabel }) {
   const {
     sku, urlKey, name: productName, inStock, typename,
   } = product;
   const name = productName || sku;
-  const href = getProductLink(urlKey, sku);
+  const href = getDetailsHref(urlKey, sku);
   const isComplex = typename === 'ComplexProductView';
+  const imageUrl = getProductImage(product);
 
   return h(
     'article',
@@ -26,9 +35,12 @@ export default function ProductCard({ product, addToCartLabel }) {
       { className: `${PREFIX}__image-link`, href },
       h('img', {
         className: `${PREFIX}__image`,
-        src: getProductImage(product),
+        src: imageUrl,
         alt: name,
         loading: 'lazy',
+        decoding: 'async',
+        width: 400,
+        height: 400,
       }),
     ),
     h(
@@ -63,7 +75,7 @@ export default function ProductCard({ product, addToCartLabel }) {
               type: 'button',
               className: `${PREFIX}__btn ${PREFIX}__btn--cart`,
               disabled: !inStock,
-              onClick: () => cartApi.addProductsToCart([{ sku, quantity: 1 }]),
+              onClick: () => addProductsToCart([{ sku, quantity: 1 }]),
             },
             addToCartLabel,
           ),

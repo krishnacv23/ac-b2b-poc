@@ -136,6 +136,7 @@
         "commerce-account-header",
         "commerce-account-sidebar",
         "commerce-custom-product-list",
+        "commerce-custom-product-details",
         "commerce-cart",
         "commerce-checkout",
         "commerce-checkout-success",

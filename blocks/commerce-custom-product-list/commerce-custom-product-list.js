@@ -1,12 +1,16 @@
 import { h, render } from '@dropins/tools/preact.js';
-import { readBlockConfig } from '../../scripts/aem.js';
+import { loadCSS, readBlockConfig } from '../../scripts/aem.js';
 import { fetchPlaceholders } from '../../scripts/commerce.js';
 import CustomProductList from '../../scripts/components/custom-product-list/CustomProductList.js';
 
 export default async function decorate(block) {
+  // Shared catalog chrome + tokens (list/PDP). Block CSS loads via loadBlock.
+  const sharedCss = loadCSS(`${window.hlx.codeBasePath}/scripts/components/custom-catalog/custom-catalog.css`);
+
   // Ensure product-discovery (and cart) are initialized before the Preact tree
   // calls search(). Side-effect imports alone can race on UE/preview first paint.
   await Promise.all([
+    sharedCss,
     import('../../scripts/initializers/search.js'),
     import('../../scripts/initializers/cart.js'),
   ]);

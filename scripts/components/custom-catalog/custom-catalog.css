@@ -1,0 +1,126 @@
+/* Shared tokens + chrome for custom catalog list + PDP blocks */
+
+.commerce-custom-product-list,
+.commerce-custom-product-details {
+  --cc-accent: var(--color-informational-800);
+  --cc-accent-soft: var(--color-informational-200);
+  --cc-surface: var(--color-neutral-50);
+  --cc-surface-muted: #f0f3f8;
+  --cc-ink: var(--color-neutral-900);
+  --cc-ink-muted: var(--color-neutral-700);
+  --cc-border: #d4dae6;
+  --cc-radius: 12px;
+  --cc-shadow: 0 10px 30px rgb(29 41 81 / 8%);
+  --cc-inline-pad: var(--spacing-medium);
+
+  margin: 0;
+  max-width: none;
+  width: 100%;
+}
+
+main > .section.commerce-custom-product-list-container,
+main > .section.commerce-custom-product-list-container > div,
+main > .section.commerce-custom-product-details-container,
+main > .section.commerce-custom-product-details-container > div {
+  margin: 0;
+  max-width: none;
+  padding: 0;
+}
+
+.commerce-custom-product-list .commerce-custom-product-list__wrapper,
+.commerce-custom-product-details .commerce-custom-product-details__wrapper {
+  background: linear-gradient(180deg, var(--cc-surface-muted) 0%, var(--cc-surface) 240px);
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow-x: clip;
+  width: 100%;
+}
+
+.commerce-custom-product-list .commerce-custom-product-list__header,
+.commerce-custom-product-details .commerce-custom-product-details__header {
+  background: linear-gradient(120deg, #1a2238 0%, #2d3a5c 55%, #1f4d6b 100%);
+  color: var(--color-neutral-50);
+  padding: var(--spacing-medium) var(--cc-inline-pad);
+  position: relative;
+}
+
+.commerce-custom-product-list .commerce-custom-product-list__header::after,
+.commerce-custom-product-details .commerce-custom-product-details__header::after {
+  background: linear-gradient(90deg, var(--cc-accent), #7ec8e3 50%, transparent);
+  content: '';
+  height: 3px;
+  inset-block-end: 0;
+  inset-inline: 0;
+  position: absolute;
+}
+
+.commerce-custom-product-list .commerce-custom-product-list__eyebrow,
+.commerce-custom-product-list .commerce-custom-product-list__heading,
+.commerce-custom-product-list .commerce-custom-product-list__price,
+.commerce-custom-product-list .commerce-custom-product-list__btn,
+.commerce-custom-product-details .commerce-custom-product-details__eyebrow,
+.commerce-custom-product-details .commerce-custom-product-details__title,
+.commerce-custom-product-details .commerce-custom-product-details__price,
+.commerce-custom-product-details .commerce-custom-product-details__btn,
+.commerce-custom-product-details .commerce-custom-product-details__section-title {
+  font-family: roboto-condensed, adobe-clean, sans-serif;
+  font-weight: 700;
+}
+
+.commerce-custom-product-list .commerce-custom-product-list__eyebrow,
+.commerce-custom-product-details .commerce-custom-product-details__eyebrow {
+  color: #9ec9ff;
+  font-size: 1.2rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.commerce-custom-product-list .commerce-custom-product-list__meta,
+.commerce-custom-product-details .commerce-custom-product-details__meta {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xsmall);
+}
+
+.commerce-custom-product-list .commerce-custom-product-list__stock,
+.commerce-custom-product-details .commerce-custom-product-details__stock {
+  border-radius: 999px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin: 0;
+  padding: 0.25rem 0.6rem;
+  text-transform: uppercase;
+}
+
+.commerce-custom-product-list .commerce-custom-product-list__stock--in,
+.commerce-custom-product-details .commerce-custom-product-details__stock--in {
+  background: var(--color-positive-200);
+  color: var(--color-positive-800);
+}
+
+.commerce-custom-product-list .commerce-custom-product-list__stock--out,
+.commerce-custom-product-details .commerce-custom-product-details__stock--out {
+  background: var(--color-alert-200);
+  color: var(--color-alert-800);
+}
+
+.commerce-custom-product-list .commerce-custom-product-list__btn--cart,
+.commerce-custom-product-details .commerce-custom-product-details__btn {
+  background: var(--cc-accent);
+  color: var(--color-neutral-50);
+  cursor: pointer;
+}
+
+.commerce-custom-product-list .commerce-custom-product-list__btn--cart:disabled,
+.commerce-custom-product-details .commerce-custom-product-details__btn:disabled {
+  cursor: not-allowed;
+}
+
+@media (min-width: 900px) {
+  .commerce-custom-product-list,
+  .commerce-custom-product-details {
+    --cc-inline-pad: var(--spacing-big);
+  }
+}
