@@ -1,6 +1,6 @@
 import { h } from '@dropins/tools/preact.js';
 import { addProductsToCart } from '@dropins/storefront-cart/api.js';
-import { getProductLink, rootLink } from '../../commerce.js';
+import { rootLink } from '../../commerce.js';
 import {
   getProductImage,
   getProductPrice,
@@ -8,12 +8,17 @@ import {
 
 const PREFIX = 'commerce-custom-product-list';
 
+// Published custom PDP page (commerce-custom-product-details block). It resolves
+// the product from the ?sku= query param, so we avoid the deprecated
+// folder-mapped /products/{urlKey}/{sku} path (which 404s without folder mapping).
+const CUSTOM_PDP_PATH = '/custom-product-details';
+
 function getDetailsHref(urlKey, sku) {
   // On local drafts, route into the custom PDP draft for an end-to-end demo.
   if (window.location.pathname.includes('/drafts/')) {
     return `${rootLink('/drafts/custom-product-details')}?sku=${encodeURIComponent(sku)}`;
   }
-  return getProductLink(urlKey, sku);
+  return `${rootLink(CUSTOM_PDP_PATH)}?sku=${encodeURIComponent(sku)}`;
 }
 
 export default function ProductCard({ product, addToCartLabel }) {
