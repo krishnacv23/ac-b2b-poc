@@ -6,6 +6,7 @@ import {
   useState,
 } from '@dropins/tools/preact-hooks.js';
 import { addProductsToCart } from '@dropins/storefront-cart/api.js';
+import { IS_DA, IS_UE, loadErrorPage } from '../../commerce.js';
 import {
   loadProductDetail,
   refineProductDetail,
@@ -199,6 +200,10 @@ export default function CustomProductDetail({
       .then((result) => {
         if (!active) return;
         if (!result?.sku) {
+          if (sku && !IS_UE && !IS_DA) {
+            loadErrorPage();
+            return;
+          }
           setProduct(null);
           setLoadState('empty');
           setStatus(`Product "${sku}" was not found.`);
