@@ -17,12 +17,15 @@ function resolveSku(config) {
   );
 }
 
+// Default catalog page for the "Back to Products" link when none is authored.
+const DEFAULT_CATALOG_PATH = '/products';
+
 function resolveBackHref(config) {
   if (config.backhref) return config.backhref;
   if (window.location.pathname.includes('/drafts/')) {
     return rootLink('/drafts/custom-products');
   }
-  return '';
+  return rootLink(DEFAULT_CATALOG_PATH);
 }
 
 export default async function decorate(block) {

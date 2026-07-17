@@ -338,7 +338,7 @@ export default function CustomProductDetail({
       'div',
       { className: `${PREFIX}__wrapper ${PREFIX}__wrapper--message` },
       h('p', { className: `${PREFIX}__status` }, status),
-      backHref && h('a', { className: `${PREFIX}__back`, href: backHref }, '← Back to catalog'),
+      backHref && h('a', { className: `${PREFIX}__back`, href: backHref }, '← Back to Products'),
     );
   }
 
@@ -353,7 +353,7 @@ export default function CustomProductDetail({
       'div',
       { className: `${PREFIX}__header` },
       h('p', { className: `${PREFIX}__eyebrow` }, 'Product Detail'),
-      backHref && h('a', { className: `${PREFIX}__back ${PREFIX}__back--header`, href: backHref }, '← Catalog'),
+      backHref && h('a', { className: `${PREFIX}__back ${PREFIX}__back--header`, href: backHref }, '← Back to Products'),
     ),
     h(
       'div',
